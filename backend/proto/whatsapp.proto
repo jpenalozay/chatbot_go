@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package whatsapp;
+
+option go_package = "chatbot/utils/proto";
+
+// Servicio gRPC para WhatsApp
+service WhatsAppService {
+  // Crea un nuevo hilo de conversación
+  rpc CreateThread(CreateThreadRequest) returns (CreateThreadResponse);
+  
+  // Crea un nuevo hilo de conversación para el analizador
+  rpc CreateThreadAnalizer(CreateThreadAnalizerRequest) returns (CreateThreadAnalizerResponse);
+  
+  // Genera una respuesta para un mensaje dado
+  rpc GenerateResponse(GenerateResponseRequest) returns (GenerateResponseResponse);
+  
+  // Genera una respuesta analizada para un mensaje dado
+  rpc GenerateResponseAnalizer(GenerateResponseAnalizerRequest) returns (GenerateResponseAnalizerResponse);
+}
+
+// Mensajes para la creación de hilos
+message CreateThreadRequest {}
+
+message CreateThreadResponse {
+  string thread_id = 1;
+}
+
+message CreateThreadAnalizerRequest {}
+
+message CreateThreadAnalizerResponse {
+  string thread_id_analizer = 1;
+}
+
+// Mensajes para la generación de respuestas
+message GenerateResponseRequest {
+  string phone = 1;
+  string thread_id = 2;
+  string message_body = 3;
+}
+
+message GenerateResponseResponse {
+  string response = 1;
+}
+
+message GenerateResponseAnalizerRequest {
+  string thread_id_analizer = 1;
+  string message_body = 2;
+}
+
+message GenerateResponseAnalizerResponse {
+  string response = 1;
+}
